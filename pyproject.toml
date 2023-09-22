@@ -1,13 +1,18 @@
 [tool.poetry]
-name = "pythonproject1"
+name = "electronics-shop-project"
 version = "0.1.0"
 description = ""
-authors = ["Egor Arhipov <111359850+Maurdihen@users.noreply.github.com>"]
+authors = ["kirillskyeng <kirill.netreba@skyeng.ru>"]
 readme = "README.md"
+packages = [{include = "electronics_shop_project"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
+pytest = "^7.4.2"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
 
 [build-system]
 requires = ["poetry-core"]
