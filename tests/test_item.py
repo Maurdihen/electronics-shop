@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+item = Item('Телефон', 10000, 5)
 
 @pytest.fixture
 def sample_item():
@@ -30,6 +31,10 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+def test_repr_str_dander_method(sample_item):
+    assert repr(sample_item) == "Item('Телефон', 10000, 5)"
+    assert str(sample_item) == 'Телефон'
 
 if __name__ == '__main__':
     pytest.main()
