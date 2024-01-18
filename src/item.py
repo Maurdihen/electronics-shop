@@ -1,11 +1,14 @@
 import csv
 
+from src.exceptions import PhoneException
+
+
 class Item:
     pay_rate = 1.0
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
-        self.__name = name
+        self._name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
@@ -18,11 +21,11 @@ class Item:
 
     @property
     def name(self):
-        return self.__name
+        return self._name
 
     @name.setter
     def name(self, data_name):
-        self.__name = data_name[0:10]
+        self._name = data_name[0:10]
 
     @classmethod
     def instantiate_from_csv(cls, path):
@@ -43,3 +46,8 @@ class Item:
 
     def __str__(self):
         return self.name
+
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        raise PhoneException(f"Невозможно сложить {self.__class__} с {other.__class__}")
