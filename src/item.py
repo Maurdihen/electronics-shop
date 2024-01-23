@@ -48,6 +48,6 @@ class Item:
         return self.name
 
     def __add__(self, other):
-        if isinstance(other, self.__class__):
+        if isinstance(other, self.__class__) or issubclass(self.__class__, other.__class__):
             return self.quantity + other.quantity
-        raise PhoneException(f"Невозможно сложить {self.__class__} с {other.__class__}")
+        raise PhoneException(f"Невозможно сложить {self.__class__} с {other.__class__}1")
