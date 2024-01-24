@@ -9,7 +9,7 @@ from src.exceptions import PhoneException
 class TestPhoneClass:
     def test_creating_phone_object(self) -> None:
         phone1 = Phone('test', 1, 2, 3)
-        assert phone1.__dict__ == {'_name': 'test', 'price': 1, 'quantity': 2, '_count_sim': 3}
+        assert phone1.__dict__ == {'_name': 'test', 'price': 1, 'quantity': 2, '_number_of_sim': 3}
 
     def test_adding_phone_objects(self):
         phone1 = Phone('test', 1, 2, 3)
@@ -25,13 +25,13 @@ class TestPhoneClass:
 
     def test_cnt_sim_valid_input(self):
         phone = Phone('test', 1, 2, 3)
-        phone.cnt_sim(2)
-        assert phone._cnt_sim == 2
+        phone.number_of_sim = 2
+        assert phone._number_of_sim == 2
 
     def test_cnt_sim_invalid_input(self):
         phone = Phone('test', 1, 2, 3)
-        with pytest.raises(ValueError, match="Значение должно быть цифрой"):
-            phone.cnt_sim("invalid")
+        with pytest.raises(ValueError, match="Значение должно быть положительной цифрой"):
+            phone.number_of_sim = "invalid"
 
     def test_add_valid_inputs(self):
         phone1 = Phone('test', 1, 2, 3)
