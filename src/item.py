@@ -1,6 +1,6 @@
 import csv
 
-from src.exceptions import PhoneException
+from src.exceptions import PhoneException, InstantiateCSVError
 
 
 class Item:
@@ -28,11 +28,16 @@ class Item:
         self._name = data_name[0:10]
 
     @classmethod
-    def instantiate_from_csv(cls, path):
-        with open(path, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row['name'], row['price'], row['quantity'])
+    def instantiate_from_csv(cls, path="../src/items.csv"):
+        try:
+            with open(path, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls(row['name'], row['price'], row['quantity'])
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except KeyError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
     def string_to_number(string):
